@@ -6,12 +6,12 @@ import (
 	"time"
 )
 
-type loggingMiddleware struct {
+type Middleware struct {
 	logger log.Logger
 	next   service.StringService
 }
 
-func (mw loggingMiddleware) Uppercase(s string) (output string, err error) {
+func (mw Middleware) Uppercase(s string) (output string, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "uppercase",
@@ -26,7 +26,7 @@ func (mw loggingMiddleware) Uppercase(s string) (output string, err error) {
 	return
 }
 
-func (mw loggingMiddleware) Count(s string) (n int) {
+func (mw Middleware) Count(s string) (n int) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "count",
